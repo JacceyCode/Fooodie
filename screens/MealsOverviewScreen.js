@@ -23,7 +23,6 @@ function MealsOverviewScreen({ route, navigation }) {
 
   const renderMealItem = (itemData) => {
     const { item } = itemData;
-
     return <MealItem item={item} />;
   };
 
