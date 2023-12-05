@@ -15,8 +15,8 @@ function MealDetailScreen({ route, navigation }) {
 
   const mealIsFavorite = ids.includes(mealId);
 
-  const changeFavoriteStatusHandler = (id) => {
-    mealIsFavorite ? removeFavorites(id) : addFavorites(id);
+  const changeFavoriteStatusHandler = () => {
+    mealIsFavorite ? removeFavorites(mealId) : addFavorites(mealId);
   };
 
   useLayoutEffect(() => {
@@ -26,7 +26,7 @@ function MealDetailScreen({ route, navigation }) {
           <IconButton
             icon={mealIsFavorite ? "star" : "star-outline"}
             color="white"
-            onPress={() => changeFavoriteStatusHandler(mealId)}
+            onPress={changeFavoriteStatusHandler}
           />
         );
       },
