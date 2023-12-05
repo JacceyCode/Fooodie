@@ -1,23 +1,40 @@
 import { useContext, useLayoutEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+// import { useDispatch, useSelector } from "react-redux";
 
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
+// import { addFavorite, removeFavorite } from "../store/redux/favorite";
 import { FavoritesContext } from "../store/context/favorites-context";
 
 function MealDetailScreen({ route, navigation }) {
-  const { ids, addFavorites, removeFavorites } = useContext(FavoritesContext);
   const mealId = route.params.mealId;
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
+  ////////////////////////////////////////////
+  // Using context API
+  const { ids, addFavorites, removeFavorites } = useContext(FavoritesContext);
   const mealIsFavorite = ids.includes(mealId);
 
   const changeFavoriteStatusHandler = () => {
     mealIsFavorite ? removeFavorites(mealId) : addFavorites(mealId);
   };
+
+  ///////////////////////////////
+  // Using Redux Tollkit
+  // const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+  // const dispatch = useDispatch();
+
+  // const mealIsFavorite = favoriteMealIds.includes(mealId);
+
+  // const changeFavoriteStatusHandler = () => {
+  //   mealIsFavorite
+  //     ? dispatch(removeFavorite({ id: mealId }))
+  //     : dispatch(addFavorite({ id: mealId }));
+  // };
 
   useLayoutEffect(() => {
     navigation.setOptions({
